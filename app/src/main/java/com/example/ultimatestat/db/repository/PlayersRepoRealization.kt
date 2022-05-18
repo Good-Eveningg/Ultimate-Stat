@@ -9,21 +9,23 @@ class PlayersRepoRealization(private val playersDao: PlayersDao) : PlayersReposi
 //    override val allPlayers: LiveData<List<PlayersModel>>
 //        get() = playersDao.getAllPlayers()
 
-    override val allPlayers = playersDao.getAllPlayers()
-
-    override suspend fun insertPlayer(playersModel: PlayersModel, onSuccess: () -> Unit) {
-        playersDao.insert(playersModel)
-        onSuccess()
+    override suspend fun getAllUsers(): List<PlayersModel> {
+        return playersDao.getAllPlayers()
     }
 
-    override suspend fun changePlayer(playersModel: PlayersModel, onSuccess: () -> Unit) {
-        playersDao.update(playersModel)
-        onSuccess()
-    }
-
-    override suspend fun deletePlayer(playersModel: PlayersModel, onSuccess: () -> Unit) {
-        playersDao.delete(playersModel)
-        onSuccess()
-    }
+//    override suspend fun insertPlayer(playersModel: PlayersModel, onSuccess: () -> Unit) {
+//        playersDao.insert(playersModel)
+//        onSuccess()
+//    }
+//
+//    override suspend fun changePlayer(playersModel: PlayersModel, onSuccess: () -> Unit) {
+//        playersDao.update(playersModel)
+//        onSuccess()
+//    }
+//
+//    override suspend fun deletePlayer(playersModel: PlayersModel, onSuccess: () -> Unit) {
+//        playersDao.delete(playersModel)
+//        onSuccess()
+//    }
 
 }

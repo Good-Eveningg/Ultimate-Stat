@@ -9,11 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.example.ultimatestat.R
 import com.example.ultimatestat.databinding.FragmentWelcomeScreenBinding
+import com.example.ultimatestat.screens.playerName.PlayerNameFragment
 
 
 class WelcomeScreen : Fragment() {
 
     lateinit var binding: FragmentWelcomeScreenBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +34,7 @@ class WelcomeScreen : Fragment() {
         binding.teamsButton.setOnClickListener { view: View ->
             Navigation.findNavController(view).navigate(R.id.action_welcomeScreen2_to_teamsFragment)
         }
-        binding.playersButton.setOnClickListener { view: View ->
+        binding.playersButton.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_welcomeScreen2_to_playerName)
         }
         binding.playerStatButton.setOnClickListener { view: View ->

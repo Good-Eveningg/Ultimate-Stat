@@ -21,7 +21,7 @@ class PlayerAdapter: RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
-        holder.itemView.numberTextView.text = listPlayer[position].nuber
+        holder.itemView.numberTextView.text = listPlayer[position].number
         holder.itemView.lastNameTextView.text = listPlayer[position].lastName
     }
 

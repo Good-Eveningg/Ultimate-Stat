@@ -1,6 +1,5 @@
 package com.example.ultimatestat.model
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,9 +8,9 @@ import androidx.room.PrimaryKey
 class PlayersModel(
     @PrimaryKey(autoGenerate = true)
     var id: Long,
-    @ColumnInfo
-    var nuber: String = "",
-    @ColumnInfo
-    var lastName: String = ""
+
+    var number: String,
+
+    var lastName: String
 )
 

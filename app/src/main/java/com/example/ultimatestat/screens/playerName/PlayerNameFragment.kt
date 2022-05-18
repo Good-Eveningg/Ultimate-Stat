@@ -11,7 +11,6 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.ultimatestat.R
 import com.example.ultimatestat.adapter.PlayerAdapter
@@ -19,28 +18,38 @@ import com.example.ultimatestat.databinding.FragmentPlayerNameBinding
 import com.example.ultimatestat.db.repository.PlayersRepoRealization
 import com.example.ultimatestat.db.room.PlayersDB
 
-
 class PlayerNameFragment : Fragment() {
 
     lateinit var binding: FragmentPlayerNameBinding
     private val adapter: PlayerAdapter by lazy { PlayerAdapter() }
 
-    private val playersRepoRealization by lazy {
-        PlayersRepoRealization(PlayersDB.getInstance(requireContext()).getPlayersDao())
+    private val playersRepoRealization: PlayersRepoRealization by lazy {
+        PlayersRepoRealization(
+            PlayersDB.getInstance(
+                requireContext()
+            )
+                .getPlayersDao
+        )
+    }
+
+    private val playerNameViewModelFactory by lazy {
+        PlayerNameViewModelFactory(
+            requireContext(),
+            playersRepoRealization
+        )
     }
 
     private val playerNameViewModel: PlayerNameViewModel by lazy {
-        ViewModelProvider(viewModelStore, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return PlayerNameViewModel(playersRepoRealization) as T
-            }
-        }).get(PlayerNameViewModel::class.java)
+        ViewModelProvider(
+            this,
+            playerNameViewModelFactory
+        )[PlayerNameViewModel::class.java]
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_player_name,
             container, false
@@ -54,15 +63,17 @@ class PlayerNameFragment : Fragment() {
         binding.floatingActionButton.setOnClickListener {
             addPlayer()
         }
+
         playerNameViewModel.playerLiveData.observe(viewLifecycleOwner) {
             adapter.setList(it)
         }
+
         playerNameViewModel.getAllPlayers()
     }
 
     private fun init() {
 //        val viewModel = ViewModelProvider(this).get(PlayerNameViewModel::class.java)
-//        playerNameViewModel.initDatabase()
+        playerNameViewModel.initDatabase()
         binding.playerName.adapter = adapter
 //        playerNameViewModel.getAllPlayers().observe(viewLifecycleOwner) { playerNotes ->
 //            playerNotes.asReversed()
@@ -78,7 +89,7 @@ class PlayerNameFragment : Fragment() {
         layout.orientation = LinearLayout.VERTICAL
 
         val playerNumber = EditText(context)
-        playerNumber.setHint("Введите игровой номер")
+        playerNumber.hint = "Введите игровой номер"
         playerNumber.inputType = InputType.TYPE_CLASS_TEXT
         layout.addView(playerNumber)
 
