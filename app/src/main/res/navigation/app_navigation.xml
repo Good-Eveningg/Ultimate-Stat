@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/welcomeScreen2">
+    <fragment
+        android:id="@+id/welcomeScreen2"
+        android:name="com.example.ultimatestat.screens.WelcomeScreen"
+        android:label="fragment_welcome_screen"
+        tools:layout="@layout/fragment_welcome_screen" >
+        <action
+            android:id="@+id/action_welcomeScreen2_to_playerName"
+            app:destination="@id/playerName" />
+        <action
+            android:id="@+id/action_welcomeScreen2_to_teamsFragment"
+            app:destination="@id/teamsFragment" />
+        <action
+            android:id="@+id/action_welcomeScreen2_to_playerStat"
+            app:destination="@id/playerStat" />
+        <action
+            android:id="@+id/action_welcomeScreen2_to_teamStat"
+            app:destination="@id/teamStat" />
+    </fragment>
+    <fragment
+        android:id="@+id/playerName"
+        android:name="com.example.ultimatestat.screens.playerName.PlayerNameFragment"
+        android:label="fragment_player_name"
+        tools:layout="@layout/fragment_player_name" />
+    <fragment
+        android:id="@+id/teamsFragment"
+        android:name="com.example.ultimatestat.screens.Teams.TeamsFragment"
+        android:label="fragment_teams"
+        tools:layout="@layout/fragment_teams" />
+    <fragment
+        android:id="@+id/playerStat"
+        android:name="com.example.ultimatestat.screens.PlayerStat.PlayerStat"
+        android:label="fragment_player_stat"
+        tools:layout="@layout/fragment_player_stat" />
+    <fragment
+        android:id="@+id/teamStat"
+        android:name="com.example.ultimatestat.screens.TeamStat.TeamStat"
+        android:label="fragment_team_stat"
+        tools:layout="@layout/fragment_team_stat" />
+</navigation>
